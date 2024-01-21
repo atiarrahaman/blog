@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row my-3">
+            
+            <div class="col-sm-6 offset-sm-3">
+                {% comment %} tempalte messages {% endcomment %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <h4 {% if message.tags %} class="{{message.tags}} alert alert-success text-center"  {% endif%}> {{message}}</h4>
+                    {% endfor %}
+                {% endif %}
+                    <h4 class="text-primary">Create your post here</h4>
+                <form action="" method="POST" novalidate class="shadow p-5" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{fm|crispy}}
+
+                    <input type="submit" value="submit" class="btn btn-primary">
+                </form>
+            </div>
+           
+        </div>
+    </div>
+{% endblock content %}
+    

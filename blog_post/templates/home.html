@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+{% if post %}
+    
+  <div class="container">
+    <div class="row">
+    
+<div class="col-sm-10 mt-5">
+  <div class="row">
+    <h4 class=" fw-bold"> Read All Blog Post : {{post |length}}</h4>
+
+    <hr>
+   
+   {% if post %}
+   {% for i in post %}
+              
+   <div class="col-sm-6 mt-3">
+     <div class="card p-2" style="width: 23rem;">
+         <div class="card-body card_body">
+           <img src="{{i.img.url}}" class="img-fluid img-thumbnail w-100 mb-3 " alt="image">
+           <h5 class="card-title">{{i.title}}</h5>
+           <h5 class="card-title">Author : {{i.author.username}}</h5>
+           <p>date :{{i.date_time}}</p>
+           <h6 class="card-subtitle mb-2 fw-bold">
+             catagory:
+             {% for cate in i.catagory.all %}
+                 <a class="text-danger fw-bold" href="{%url 'catagory_filter' cate.slug %}">{{cate.name}}</a>
+             {% endfor %}
+               
+           </h6>
+           <p class="card-text">{{i.des|truncatechars:100}}</p>
+           <a href="{%url 'post_details' i.id%}" >see more</a>
+         
+         </div>
+       </div>
+ </div>
+ 
+ {% endfor %}
+{%else%}
+    <h3 class="text-danger ">No data found</h3>
+{% endif %}
+    
+  </div>
+</div>
+<div class="col-sm-2 mt-5">
+<h4>Catagory List</h4><hr>
+{% for i in cate %}
+  <ul>
+    <li> <a href="{%url 'catagory_filter' i.slug %}">{{i.name}}</a></li>
+  </ul>
+{% endfor %}
+
+</div>
+             
+</div>
+</div> 
+     
+{% endif %}
+    
+
+
+  
+{% endblock content %}
+    

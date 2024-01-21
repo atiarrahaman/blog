@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="row my-4">
+           
+            <div class="col-sm-6 offset-sm-3">
+                
+                {% if messages %}
+                    
+                    {% for message in messages %}
+                    <h4 {%if message.tags%} class="{{message.tags}} alert alert-success text-center" {%endif%}>{{message}}</h4>
+                        
+                    {% endfor %}
+                        
+                {% endif %}
+                    
+                <h4>Signup</h4>
+                
+                <form action="" method="post" class="shadow p-5" novalidate>
+                    {% csrf_token %}
+                    <!--{{fm|crispy}}-->
+                    
+                    {% for form in fm %}
+                        {{form.label_tag}} {{form}} {{form.errors|striptags}} <br>
+                    {% endfor %}
+                        
+                    
+                    <input type="submit" class="btn btn-primary mt-4" value="signup">
+                    <br>
+                    <div class="text-center text-primary fw-bold"> <small>I have account <a href="{% url 'login' %}"
+                     class="text-danger">login</a></small> </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </div>
+{% endblock content %}
+    

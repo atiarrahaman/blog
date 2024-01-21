@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="row my-4">
+        <div class="col-sm-6 offset-sm-3">
+            <h4 class="text-primary ">Change password with old passwords</h4>
+            
+            {% if messages %}
+                
+                {% for mes in messages %}
+                    <h4 {%if mes.tags%} class="{{mes.tags}} alert alert-success text-center" {%endif%}>{{mes}}</h4>
+                {% endfor %}
+                    
+            {% endif %}
+                
+                {% if fm.errors %}
+                    <p class="alert alert-danger text-center">please Enter a valid passwords</p>
+                {% endif %}
+                    
+            <form action="" method="post" class="shadow p-4" novalidate>
+                {% csrf_token %}
+                {{fm|crispy}}
+                <input type="submit" value="change" class="btn btn-warning">
+                <p class="text-primary text-center fw-bold">no change right now <a class="text-danger" href="{%url 'profile'%}">profile</a> </p>
+            </form>
+        </div>
+        </div>
+    </div>
+{% endblock content %}
+    

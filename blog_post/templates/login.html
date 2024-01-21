@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row my-4">
+           
+        
+        
+                
+            <div class="col-sm-6 offset-sm-3">
+               <h4>Login</h4>
+               
+                <form action="" method="post"  class="shadow p-5" novalidate>
+                    {% csrf_token %}
+                    {{fm|crispy}}
+                    <small> <a href="">Forget password?</a> </small><br>
+                    <input type="submit" value="login" class="btn btn-success mt-4"> <br>
+                    <div class="text-center text-primary fw-bold">I have no account <a class="text-danger" href="{%url 'signup'%}">signup</a> </div>
+                </form>
+                
+            </div>
+            
+        </div>
+    </div>
+{% endblock content %}
+    

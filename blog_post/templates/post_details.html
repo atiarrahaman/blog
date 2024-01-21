@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags%}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-sm-4 post_details_img">
+                <img class="img-fluid img-thumbnail" src="{{post_details.img.url}}" alt="">
+            </div>
+            <div class="col-sm-8">
+                <h5 class="card-title"> Title: {{post_details.title}}</h5>
+                        <h5 class="card-title">Author: {{post_details.author.username}}</h5>
+                        <h6 class="card-subtitle mb-2 fw-bold">
+                          catagory:
+                          {% for cate in post_details.catagory.all %}
+                              <span class="text-danger">{{cate.name}}</span>
+                          {% endfor %}
+                            
+                        </h6>
+                        <h6>date : {{post_details.date_time}}</h6>
+                        <p class="card-text my-3">{{post_details.des}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-md-5">
+                <h4 class="">Write Your Comment Here</h4>
+                <hr>
+                <form action="" method='POST'>
+                    {% csrf_token %}
+
+                    {% if request.user.is_authenticated %}
+                    {{fm |crispy}}
+                        <input type="submit" value="coment" class="btn btn-primary">
+                    {% else %}
+                        <p>You have mute be <a class="text-danger" href="{%url 'login'%}">Login </a> for write comment</p>
+                    {% endif %}
+                        
+                </form>
+            </div>
+            <div class="col-md-6 offset-md-1">
+                <h4>All coments : </h4>
+                <hr>
+                {% for i in all_comment %}
+                    
+                    <p> <span class="fw-bold text-primary">{{i.user.username}} : </span>{{i.comment}}</p>
+                {% endfor %}
+                    
+               
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

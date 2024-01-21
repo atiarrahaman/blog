@@ -1,0 +1,17 @@
+.card_body img{
+    height: 200px;
+}
+
+.post_details_img img{
+    width: 300px;
+    height: 250px;
+}
+
+footer .footer {
+
+    background: #101010;
+    padding: 20px;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 15px;
+}
